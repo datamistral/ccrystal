@@ -1,5 +1,5 @@
-﻿namespace CModels {
-    public class Processor : CrystalDecisions.Windows.Forms.CrystalReportViewer {
+﻿namespace CCrystal {
+    public class Processor: CrystalDecisions.Windows.Forms.CrystalReportViewer {
         Report _handler;
         public Processor(Report handler) {
             this.ReportRefresh += Processor_ReportRefresh;

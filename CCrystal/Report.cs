@@ -1,9 +1,10 @@
 ﻿using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using System;
+using CModels;
 
-namespace CModels {
-    public class Report : IDisposable, ICCrystal {
+namespace CCrystal {
+    public class Report: IDisposable, ICCrystal {
         ReportDocument _objReport = null;
 
         public event System.EventHandler ExternlaHandling;
@@ -68,7 +69,6 @@ namespace CModels {
             catch (Exception) {
                 throw;
             }
-
         }
 
         public string Execute(Enums.ExportTypeList type) {
@@ -256,7 +256,7 @@ namespace CModels {
             }
 
         }
-        public dynamic GetObjectValue(string code, string key = "", object data = null) {
+        public dynamic Process(string code, string key, object data) {
             switch (code) {
                 case "dispose":
                     Dispose();
@@ -271,12 +271,10 @@ namespace CModels {
                     return new ParameterRangeValue();
                 case "value":
                     return new ParameterDiscreteValue();
-                case "process":
-                    return CProcessing.Processor.SetData(_objReport, data);
                 case "processor":
                     return new Processor(this);
                 case "data":
-                    return CProcessing.Processor.GetData(_objReport, key);
+                    return CProcessing.Processor.GetValue(_objReport, key, data);
                 default:
                     throw new Exception("Crystal reports plugin unknown request.");
             }
