@@ -5,20 +5,25 @@ using System.IO;
 namespace CDownloadHelper {
     public class Install : IInstaller {
         public bool EnsureInstalled(int appType, string installerPath) {
-            string appName = string.Empty;
+            string packageName = string.Empty;
             string fileName = string.Empty;
             string uri = string.Empty;
+            string appName = string.Empty;
+
             if (appType == 32) {
-                appName = Resources.crname32;
+                packageName = Resources.crname32;
                 fileName = Resources.crfname32;
                 if (string.IsNullOrEmpty(installerPath)) uri = Resources.cruri32;
+                appName = "SAP Crystal Reports runtime engine for .NET Framework (32-bit)";
             } else {
-                appName = Resources.crfname64;
-                if (string.IsNullOrEmpty(installerPath)) uri = Resources.cruri32;
+                packageName = Resources.crfname64;
+                if (string.IsNullOrEmpty(installerPath)) uri = Resources.cruri64;
                 fileName = Resources.crfname64;
+                appName = "SAP Crystal Reports runtime engine for .NET Framework (64-bit)";
             }
 
-            long appVersion = Functions.GetInstalledVersion(appName);
+            long appVersion = Functions.GetInstalledVersion(packageName);
+            if (appVersion == 0) appVersion=Functions.GetInstalledVersion(appName);
             long requiredVersion = Convert.ToInt64(Resources.crminversion);
 
             bool needInstall = (appVersion == 0);

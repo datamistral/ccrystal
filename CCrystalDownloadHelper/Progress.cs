@@ -23,9 +23,11 @@ namespace CCrystalDownloadHelper {
                 decimal progressValue = (decimal)e.BytesReceived / e.TotalBytesToReceive;
                 progressBar.Value = Convert.ToInt32(progressValue * 100);
                 lProgress.Text = string.Format("{0} Mb / {1} Mb   {2}", ToMb(e.BytesReceived), ToMb(e.TotalBytesToReceive), progressValue.ToString("P", System.Globalization.CultureInfo.InvariantCulture));
-            } catch (Exception) {
+            } catch (Exception ex) {
                 progressBar.Style = ProgressBarStyle.Continuous;
                 lProgress.Text = "Downloading ...";
+                toolTip1.SetToolTip(lTooltip, ex.Message);
+                lTooltip.Text = ".";
             }
         }
 

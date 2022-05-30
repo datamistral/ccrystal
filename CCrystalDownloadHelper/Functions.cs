@@ -1,8 +1,11 @@
 ﻿using CCrystalDownloadHelper.Properties;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Management;
 
 namespace CDownloadHelper {
     internal class Functions {
@@ -10,25 +13,48 @@ namespace CDownloadHelper {
         internal static long GetInstalledVersion(string appName) {
             long ret = 0;
             try {
-                using (RegistryKey key = Registry.LocalMachine.OpenSubKey(Resources.uninstall_registry_key)) {
-                    foreach (string subkey_name in key.GetSubKeyNames()) {
-                        using (RegistryKey subkey = key.OpenSubKey(subkey_name)) {
-                            var data = subkey.GetValue("DisplayName");
-                            if (data != null) {
-                                string displayValue = (string)data;
-                                if (string.Compare(appName, displayValue, true) == 0) {
-                                    ret = Convert.ToInt64(((string)subkey.GetValue("DisplayVersion")).Replace(".", ""));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (System.Exception) {
+                // "SAP Crystal Reports runtime engine for .NET Framework (64-bit)"
+                List<string> keys = new List<string>() {
+                      @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+                      @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+                    };
+                string version = FindInstalledVersion(RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64), keys, appName);
+                if (string.IsNullOrEmpty(version))
+                    version = FindInstalledVersion(RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64), keys, appName);
+
+                if (!string.IsNullOrEmpty(version))
+                    ret = Convert.ToInt64(version.Replace(".", ""));
+
+            } catch (System.Exception ex) {
                 // do nothing
             }
 
             return ret;
+        }
+
+        private static string FindInstalledVersion(RegistryKey regKey, List<string> keys, string appName) {
+            string result = string.Empty;
+            foreach (string key in keys) {
+                using (RegistryKey rk = regKey.OpenSubKey(key)) {
+                    if (rk == null) {
+                        continue;
+                    }
+                    foreach (string skName in rk.GetSubKeyNames()) {
+                        using (RegistryKey sk = rk.OpenSubKey(skName)) {
+                            try {
+                                string displayValue = Convert.ToString(sk.GetValue("DisplayName"));
+                                if (string.Compare(displayValue, appName, true) == 0) {
+                                    result = Convert.ToString(sk.GetValue("DisplayVersion"));
+                                    break;
+                                }
+                            } catch (Exception ex) { }
+                        }
+                    }
+                    if (!string.IsNullOrEmpty(result))
+                        break;
+                }
+            }
+            return result;
         }
 
         internal static bool CheckForInternetConnection() {
@@ -38,8 +64,7 @@ namespace CDownloadHelper {
                         return true;
                     }
                 }
-            }
-            catch {
+            } catch {
                 return false;
             }
         }
@@ -50,8 +75,7 @@ namespace CDownloadHelper {
                 string assemblyPath = System.Reflection.Assembly.GetExecutingAssembly().CodeBase;
                 System.UriBuilder ub = new System.UriBuilder(assemblyPath);
                 ret = System.IO.Path.GetDirectoryName(System.Uri.UnescapeDataString(ub.Path));
-            }
-            catch (System.Exception) {
+            } catch (System.Exception) {
                 // do nothing
             }
 

@@ -24,10 +24,13 @@ namespace CCrystalDownloadHelper {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.lCaption = new System.Windows.Forms.Label();
             this.lBorder = new System.Windows.Forms.Label();
             this.lProgress = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.lTooltip = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // progressBar
@@ -36,7 +39,7 @@ namespace CCrystalDownloadHelper {
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar.Location = new System.Drawing.Point(12, 40);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(580, 19);
+            this.progressBar.Size = new System.Drawing.Size(440, 19);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar.TabIndex = 1;
             // 
@@ -56,7 +59,7 @@ namespace CCrystalDownloadHelper {
             this.lBorder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lBorder.Location = new System.Drawing.Point(0, 0);
             this.lBorder.Name = "lBorder";
-            this.lBorder.Size = new System.Drawing.Size(604, 84);
+            this.lBorder.Size = new System.Drawing.Size(464, 84);
             this.lBorder.TabIndex = 3;
             // 
             // lProgress
@@ -67,11 +70,21 @@ namespace CCrystalDownloadHelper {
             this.lProgress.Size = new System.Drawing.Size(0, 13);
             this.lProgress.TabIndex = 4;
             // 
+            // lTooltip
+            // 
+            this.lTooltip.AutoSize = true;
+            this.lTooltip.Location = new System.Drawing.Point(442, 17);
+            this.lTooltip.Name = "lTooltip";
+            this.lTooltip.Size = new System.Drawing.Size(10, 13);
+            this.lTooltip.TabIndex = 5;
+            this.lTooltip.Text = " ";
+            // 
             // Progress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(604, 84);
+            this.ClientSize = new System.Drawing.Size(464, 84);
+            this.Controls.Add(this.lTooltip);
             this.Controls.Add(this.lProgress);
             this.Controls.Add(this.lCaption);
             this.Controls.Add(this.progressBar);
@@ -92,5 +105,7 @@ namespace CCrystalDownloadHelper {
         private System.Windows.Forms.Label lCaption;
         private System.Windows.Forms.Label lBorder;
         private System.Windows.Forms.Label lProgress;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label lTooltip;
     }
 }
