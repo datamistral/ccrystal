@@ -18,6 +18,7 @@ namespace CCrystal {
             set { _objReport = value; }
         }
 
+        public long LoadingTime { get; set; }
         public string Path { get; set; }
         public bool IsEmpty { get; set; }
         public bool DoNotRefresh { get; set; }
@@ -52,8 +53,7 @@ namespace CCrystal {
                             break;
                     }
                 }
-            }
-            catch (Exception) {
+            } catch (Exception) {
                 throw;
             }
 
@@ -63,10 +63,11 @@ namespace CCrystal {
         public void Init(string path) {
             try {
                 OnExternlaHandling("reset");
+                var watch = System.Diagnostics.Stopwatch.StartNew();
                 this.Path = path;
                 LoadReportFile(path, OpenReportMethod.OpenReportByTempCopy);
-            }
-            catch (Exception) {
+                this.LoadingTime = watch.ElapsedMilliseconds;
+            } catch (Exception) {
                 throw;
             }
         }
@@ -100,8 +101,7 @@ namespace CCrystal {
                     if (System.IO.File.Exists(strTempFile))
                         strRet = strTempFile;
                 }
-            }
-            catch (System.Exception) {
+            } catch (System.Exception) {
                 throw;
             }
 
@@ -168,8 +168,7 @@ namespace CCrystal {
                 }
 
                 strRet = System.IO.Path.Combine(strFolderName, string.Format("{0}.{1}", strFileName, strExtension));
-            }
-            catch (Exception) {
+            } catch (Exception) {
                 throw;
             }
             return strRet;
@@ -202,8 +201,7 @@ namespace CCrystal {
                         }
                     }
                 }
-            }
-            catch (Exception) {
+            } catch (Exception) {
                 throw;
             }
         }
@@ -219,8 +217,7 @@ namespace CCrystal {
                 OnExternlaHandling("loaded");
 
                 blnRet = (_objReport != null);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 OnExternlaHandling("loadreportfile", ex, Enums.ActionTypeList.Error);
                 throw;
             }
@@ -238,8 +235,7 @@ namespace CCrystal {
                     OnExternlaHandling("disposing");
                     _objReport = null;
                 }
-            }
-            catch (Exception) {
+            } catch (Exception) {
                 throw;
             }
         }
@@ -250,8 +246,7 @@ namespace CCrystal {
                     _objReport.NoData -= _objReport_NoData;
                     _objReport = null;
                 }
-            }
-            catch (Exception) {
+            } catch (Exception) {
                 throw;
             }
 
