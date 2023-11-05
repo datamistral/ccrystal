@@ -18,7 +18,7 @@ namespace CDownloadHelper {
                     if (!string.IsNullOrEmpty(downloadPath)) {
                         uri = Uri.UnescapeDataString(downloadPath);
                         using (CCrystalDownloadHelper.Progress progress = new CCrystalDownloadHelper.Progress()) {
-                            progress.SetCaptionLabel($"Downloading {packageName} from URL:");
+                            progress.SetCaptionLabel(string.Format("Downloading {0} from URL:", packageName));
                             progress.Url = uri;
                             progress.FileName = fullFileName;
                             progress.ShowDialog();
