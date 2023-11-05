@@ -47,7 +47,7 @@ namespace CCrystalDownloadHelper {
         private void bDownload_Click(object sender, EventArgs e) {
             tUrl.Visible = false;
             bDownload.Visible = false;
-            lCaption.Text = string.Format("Downloading:{0}", tUrl.Text);
+            lUrl.Text = string.Format("Downloading:{0}", tUrl.Text);
             progressBar.Visible = true;
             Application.DoEvents();
             StartDownload(tUrl.Text, this.FileName);
