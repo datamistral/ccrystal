@@ -1,11 +1,8 @@
-﻿using CCrystalDownloadHelper.Properties;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Management;
 
 namespace CDownloadHelper {
     internal class Functions {
@@ -13,15 +10,7 @@ namespace CDownloadHelper {
         internal static long GetInstalledVersion(string appName) {
             long ret = 0;
             try {
-                // "SAP Crystal Reports runtime engine for .NET Framework (64-bit)"
-                List<string> keys = new List<string>() {
-                      @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
-                      @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
-                    };
-                string version = FindInstalledVersion(RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64), keys, appName);
-                if (string.IsNullOrEmpty(version))
-                    version = FindInstalledVersion(RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64), keys, appName);
-
+                string version = GetInstalledVersionString(appName);
                 if (!string.IsNullOrEmpty(version))
                     ret = Convert.ToInt64(version.Replace(".", ""));
 
@@ -32,6 +21,59 @@ namespace CDownloadHelper {
             return ret;
         }
 
+        internal static bool NeedsInstall(string packageName, string appName, string minVersion) {
+            bool ret = true;
+            string appVersion = Functions.GetInstalledVersionString(packageName);
+            if (string.IsNullOrEmpty(appVersion)) appVersion = Functions.GetInstalledVersionString(appName);
+
+
+            bool needInstall = (string.IsNullOrEmpty(appVersion));
+            if (!needInstall) {
+                if (Functions.CompareVersions(minVersion, appVersion) < 0) {
+                    ret = false;
+                }
+            }
+            return ret;
+        }
+
+        internal static string GetInstalledVersionString(string appName) {
+            string ret = string.Empty;
+            try {
+                // "SAP Crystal Reports runtime engine for .NET Framework (64-bit)"
+                List<string> keys = new List<string>() {
+                      @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+                      @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+                    };
+                ret = FindInstalledVersion(RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64), keys, appName);
+                if (string.IsNullOrEmpty(ret))
+                    ret = FindInstalledVersion(RegistryKey.OpenBaseKey(RegistryHive.CurrentUser, RegistryView.Registry64), keys, appName);
+
+            } catch (System.Exception ex) {
+                // do nothing
+            }
+
+            return ret;
+        }
+
+        internal static bool FileExists(string path) {
+            bool ret = false;
+            try {
+                if (File.Exists(path)) {
+                    if (new System.IO.FileInfo(path).Length > 0) {
+                        ret = true;
+                    }
+                }
+            } catch (Exception) {
+                // do nothing
+            }
+
+            return ret;
+        }
+        internal static int CompareVersions(string ver1, string ver2) {
+            Version vers1 = new Version(ver1);
+            Version vers2 = new Version(ver2);
+            return vers1.CompareTo(vers2);
+        }
         private static string FindInstalledVersion(RegistryKey regKey, List<string> keys, string appName) {
             string result = string.Empty;
             foreach (string key in keys) {

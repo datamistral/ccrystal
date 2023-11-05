@@ -117,31 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="crfname32" xml:space="preserve">
-    <value>CRRuntime_32bit_13_0_30.msi</value>
+  <data name="Type" xml:space="preserve">
+    <value>&lt;CCrystalDownloadHelperAndInstaller&gt;</value>
   </data>
-  <data name="crfname64" xml:space="preserve">
-    <value>CRRuntime_64bit_13_0_30.msi</value>
-  </data>
-  <data name="crminversion" xml:space="preserve">
-    <value>130303805</value>
-  </data>
-  <data name="crname32" xml:space="preserve">
-    <value>SAP Crystal Reports runtime engine for .NET Framework (32-bit)</value>
-  </data>
-  <data name="crname64" xml:space="preserve">
-    <value>SAP Crystal Reports runtime engine for .NET Framework (64-bit)</value>
-  </data>
-  <data name="crruntimeversion_registry_key" xml:space="preserve">
-    <value>SOFTWARE\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Crystal Reports</value>
-  </data>
-  <data name="cruri32" xml:space="preserve">
-    <value>https://origin.softwaredownloads.sap.com/public/file/0020000000195592021</value>
-  </data>
-  <data name="cruri64" xml:space="preserve">
-    <value>https://origin.softwaredownloads.sap.com/public/file/0020000000195602021</value>
-  </data>
-  <data name="uninstall_registry_key" xml:space="preserve">
-    <value>SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall</value>
+  <data name="VeresionDate" xml:space="preserve">
+    <value>#01/01/2009#</value>
   </data>
 </root>

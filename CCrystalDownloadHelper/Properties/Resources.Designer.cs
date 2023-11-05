@@ -61,83 +61,20 @@ namespace CCrystalDownloadHelper.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CRRuntime_32bit_13_0_30.msi.
+        ///   Looks up a localized string similar to &lt;CCrystalDownloadHelperAndInstaller&gt;.
         /// </summary>
-        internal static string crfname32 {
+        internal static string Type {
             get {
-                return ResourceManager.GetString("crfname32", resourceCulture);
+                return ResourceManager.GetString("Type", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CRRuntime_64bit_13_0_30.msi.
+        ///   Looks up a localized string similar to #01/01/2009#.
         /// </summary>
-        internal static string crfname64 {
+        internal static string VeresionDate {
             get {
-                return ResourceManager.GetString("crfname64", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 130303805.
-        /// </summary>
-        internal static string crminversion {
-            get {
-                return ResourceManager.GetString("crminversion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SAP Crystal Reports runtime engine for .NET Framework (32-bit).
-        /// </summary>
-        internal static string crname32 {
-            get {
-                return ResourceManager.GetString("crname32", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SAP Crystal Reports runtime engine for .NET Framework (64-bit).
-        /// </summary>
-        internal static string crname64 {
-            get {
-                return ResourceManager.GetString("crname64", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SOFTWARE\SAP BusinessObjects\Crystal Reports for .NET Framework 4.0\Crystal Reports.
-        /// </summary>
-        internal static string crruntimeversion_registry_key {
-            get {
-                return ResourceManager.GetString("crruntimeversion_registry_key", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://origin.softwaredownloads.sap.com/public/file/0020000000195592021.
-        /// </summary>
-        internal static string cruri32 {
-            get {
-                return ResourceManager.GetString("cruri32", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://origin.softwaredownloads.sap.com/public/file/0020000000195602021.
-        /// </summary>
-        internal static string cruri64 {
-            get {
-                return ResourceManager.GetString("cruri64", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall.
-        /// </summary>
-        internal static string uninstall_registry_key {
-            get {
-                return ResourceManager.GetString("uninstall_registry_key", resourceCulture);
+                return ResourceManager.GetString("VeresionDate", resourceCulture);
             }
         }
     }

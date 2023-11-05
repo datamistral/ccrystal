@@ -1,5 +1,5 @@
 ﻿namespace CDownloadHelper {
     public interface IInstaller {
-        bool EnsureInstalled(int appType, string installerPath);
+        bool EnsureInstalledApp(int appType, string minVersion, string appName, string packageName, string fileName, string downloadPath);
     }
 }

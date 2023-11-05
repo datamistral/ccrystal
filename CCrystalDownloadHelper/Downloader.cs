@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
 using System.Windows.Forms;
 
 namespace CDownloadHelper {
@@ -22,13 +23,23 @@ namespace CDownloadHelper {
 
         public void DownloadAsync(string uri, string fileName) {
             if (Functions.CheckForInternetConnection()) {
-                using (WebClient wc = new WebClient()) {
+                string folder = Path.GetDirectoryName(fileName);
+                string newFile = Path.Combine(folder, string.Format("{0}.download", System.Guid.NewGuid().ToString("N")));
+                using (CDownloadHelper.CustomWebClient wc = new CDownloadHelper.CustomWebClient()) {
                     wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
                     wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
-                    wc.DownloadFileAsync(new System.Uri(uri), fileName);
+                    wc.DownloadFileAsync(new System.Uri(uri), newFile);
                     while (!_blnDownloadFinished) {
                         Application.DoEvents();
                     }
+                    try {
+                        if (File.Exists(fileName))
+                            File.Delete(fileName);
+                    } catch (System.Exception) {
+                    }
+                    Application.DoEvents();
+                    System.Threading.Thread.Sleep(1000);
+                    File.Move(newFile, fileName);
                 }
             }
         }

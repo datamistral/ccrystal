@@ -31,26 +31,30 @@ namespace CCrystalDownloadHelper {
             this.lProgress = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lTooltip = new System.Windows.Forms.Label();
+            this.tUrl = new System.Windows.Forms.TextBox();
+            this.bDownload = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // progressBar
             // 
-            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.Location = new System.Drawing.Point(12, 40);
+            this.progressBar.Location = new System.Drawing.Point(12, 57);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(440, 19);
+            this.progressBar.Size = new System.Drawing.Size(545, 19);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar.TabIndex = 1;
+            this.progressBar.Visible = false;
             // 
             // lCaption
             // 
+            this.lCaption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lCaption.AutoSize = true;
-            this.lCaption.Location = new System.Drawing.Point(12, 17);
+            this.lCaption.Location = new System.Drawing.Point(12, 24);
             this.lCaption.Name = "lCaption";
-            this.lCaption.Size = new System.Drawing.Size(81, 13);
+            this.lCaption.Size = new System.Drawing.Size(20, 13);
             this.lCaption.TabIndex = 2;
-            this.lCaption.Text = "Downloading ...";
+            this.lCaption.Text = "Url";
             // 
             // lBorder
             // 
@@ -59,31 +63,54 @@ namespace CCrystalDownloadHelper {
             this.lBorder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lBorder.Location = new System.Drawing.Point(0, 0);
             this.lBorder.Name = "lBorder";
-            this.lBorder.Size = new System.Drawing.Size(464, 84);
+            this.lBorder.Size = new System.Drawing.Size(569, 101);
             this.lBorder.TabIndex = 3;
             // 
             // lProgress
             // 
             this.lProgress.AutoSize = true;
-            this.lProgress.Location = new System.Drawing.Point(12, 62);
+            this.lProgress.Location = new System.Drawing.Point(12, 79);
             this.lProgress.Name = "lProgress";
             this.lProgress.Size = new System.Drawing.Size(0, 13);
             this.lProgress.TabIndex = 4;
             // 
             // lTooltip
             // 
+            this.lTooltip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lTooltip.AutoSize = true;
-            this.lTooltip.Location = new System.Drawing.Point(442, 17);
+            this.lTooltip.Location = new System.Drawing.Point(442, 34);
             this.lTooltip.Name = "lTooltip";
             this.lTooltip.Size = new System.Drawing.Size(10, 13);
             this.lTooltip.TabIndex = 5;
             this.lTooltip.Text = " ";
             // 
+            // tUrl
+            // 
+            this.tUrl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tUrl.Location = new System.Drawing.Point(38, 21);
+            this.tUrl.Name = "tUrl";
+            this.tUrl.Size = new System.Drawing.Size(438, 20);
+            this.tUrl.TabIndex = 6;
+            // 
+            // bDownload
+            // 
+            this.bDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bDownload.Location = new System.Drawing.Point(482, 21);
+            this.bDownload.Name = "bDownload";
+            this.bDownload.Size = new System.Drawing.Size(75, 23);
+            this.bDownload.TabIndex = 7;
+            this.bDownload.Text = "Download";
+            this.bDownload.UseVisualStyleBackColor = true;
+            this.bDownload.Click += new System.EventHandler(this.bDownload_Click);
+            // 
             // Progress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 84);
+            this.ClientSize = new System.Drawing.Size(569, 101);
+            this.Controls.Add(this.bDownload);
+            this.Controls.Add(this.tUrl);
             this.Controls.Add(this.lTooltip);
             this.Controls.Add(this.lProgress);
             this.Controls.Add(this.lCaption);
@@ -94,6 +121,7 @@ namespace CCrystalDownloadHelper {
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Progress";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.Progress_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,5 +135,7 @@ namespace CCrystalDownloadHelper {
         private System.Windows.Forms.Label lProgress;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label lTooltip;
+        private System.Windows.Forms.TextBox tUrl;
+        private System.Windows.Forms.Button bDownload;
     }
 }
