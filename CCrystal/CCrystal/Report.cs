@@ -4,7 +4,7 @@ using System;
 using CModels;
 
 namespace CCrystal {
-    public class Report : IDisposable, ICCrystal {
+    public class Report : IDisposable, ICMReport {
         ReportDocument _objReport = null;
 
         public event System.EventHandler ExternlaHandling;
@@ -32,6 +32,14 @@ namespace CCrystal {
         public string TempFolder { get; set; }
         public bool IsInitialized {
             get { return (_objReport != null); }
+        }
+
+        public string Company {
+            get { return ""; }
+        }
+
+        public string Version {
+            get { return "1.0.0"; }
         }
 
         #endregion
