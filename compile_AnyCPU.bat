@@ -14,6 +14,6 @@ if not exist "%subfolder%" (
     echo Subfolder already exists.
 )
 
-"C:\Windows\Microsoft.NET\Framework\v4.0.30319\MsBuild.exe" CCrystal\CCrystal.csproj /t:Clean,Build /p:OutputPath="%subfolder%" /p:BuildProjectReferences=false /p:Configuration=Release /p:Platform="AnyCPU" /logger:FileLogger,Microsoft.Build.Engine;logfile=%subfolder%\CCrystal.log
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\MsBuild.exe" CCrystal\CCrystal.csproj /t:Clean,Build /p:OutputPath="%subfolder%" /p:BuildProjectReferences=false /p:Configuration=Release /p:Platform="AnyCPU" /logger:FileLogger,Microsoft.Build.Engine;logfile="%subfolder%"\CCrystal.log
 
 cmd
